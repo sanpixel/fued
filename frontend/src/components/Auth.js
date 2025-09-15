@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getSupabase, initializeSupabase } from '../supabaseClient';
 import TodoCard from './TodoCard';
+import AICard from './AICard';
 import logo from '../logo.svg';
 
 export default function Auth() {
@@ -75,7 +76,7 @@ export default function Auth() {
         <div style={{margin: '20px 0'}} />
         <div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
           <TodoCard />
-          <TodoCard />
+          <AICard />
         </div>
       </>
     );
@@ -116,7 +117,7 @@ export default function Auth() {
       <div style={{margin: '20px 0'}} />
       <div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
         <TodoCard />
-        <TodoCard />
+        <AICard />
       </div>
       {!config && <p style={{color: 'red', fontSize: '12px'}}>Config not loaded</p>}
       <p>
