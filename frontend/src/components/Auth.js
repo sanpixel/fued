@@ -109,6 +109,7 @@ export default function Auth() {
         </svg>
         Sign in with Google
       </button>
+      <TodoCard />
       {!config && <p style={{color: 'red', fontSize: '12px'}}>Config not loaded</p>}
       <p>
         <a
