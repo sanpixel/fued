@@ -22,11 +22,13 @@ const AICard = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setLastResponse(data.aiResponse);
         setAiInput('');
-        // Optionally refresh the todo list in the other card
+        setLastResponse('✅ Todo added successfully!');
+        // Clear success message after 2 seconds
+        setTimeout(() => setLastResponse(''), 2000);
       } else {
-        setLastResponse('Error: Could not process request');
+        setLastResponse('❌ Error: Could not process request');
+        setTimeout(() => setLastResponse(''), 3000);
       }
     } catch (error) {
       console.error('AI request failed:', error);
@@ -70,19 +72,13 @@ const AICard = () => {
           <div style={{
             marginTop: '16px',
             padding: '12px',
-            backgroundColor: '#f8f9fa',
+            backgroundColor: lastResponse.includes('✅') ? '#d4edda' : '#f8d7da',
             borderRadius: '4px',
-            borderLeft: '4px solid #28a745'
+            borderLeft: `4px solid ${lastResponse.includes('✅') ? '#28a745' : '#dc3545'}`,
+            textAlign: 'center',
+            color: lastResponse.includes('✅') ? '#155724' : '#721c24'
           }}>
-            <div style={{fontSize: '12px', color: '#6c757d', marginBottom: '4px'}}>
-              AI Generated:
-            </div>
-            <div style={{color: '#212529', fontStyle: 'italic'}}>
-              "{lastResponse}"
-            </div>
-            <div style={{fontSize: '11px', color: '#28a745', marginTop: '4px'}}>
-              ✅ Added to your todo list
-            </div>
+            {lastResponse}
           </div>
         )}
 
