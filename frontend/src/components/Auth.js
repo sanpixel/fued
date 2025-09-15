@@ -72,7 +72,11 @@ export default function Auth() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Welcome, {session.user.email}!</p>
         <button onClick={signOut}>Sign Out</button>
-        <TodoCard />
+        <div style={{margin: '20px 0'}} />
+        <div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
+          <TodoCard />
+          <TodoCard />
+        </div>
       </>
     );
   }
@@ -109,7 +113,11 @@ export default function Auth() {
         </svg>
         Sign in with Google
       </button>
-      <TodoCard />
+      <div style={{margin: '20px 0'}} />
+      <div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
+        <TodoCard />
+        <TodoCard />
+      </div>
       {!config && <p style={{color: 'red', fontSize: '12px'}}>Config not loaded</p>}
       <p>
         <a

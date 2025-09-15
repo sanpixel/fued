@@ -54,6 +54,8 @@
   border-radius: 4px;
   font-size: 14px;
   outline: none;
+  color: #212529;
+  background-color: white;
 }
 
 .todo-input:focus {
@@ -119,6 +121,7 @@
   transition: background-color 0.2s ease;
   font-size: 14px;
   word-wrap: break-word;
+  color: #212529;
 }
 
 .todo-text:hover {
@@ -132,6 +135,8 @@
   padding: 4px 8px;
   font-size: 14px;
   outline: none;
+  color: #212529;
+  background-color: white;
 }
 
 .todo-actions {

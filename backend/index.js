@@ -23,7 +23,14 @@ if (!OPENAI_API_KEY) {
 const openai = OPENAI_API_KEY ? new OpenAI({ apiKey: OPENAI_API_KEY }) : null;
 
 // Dynamic table names from repo name
-const APP_NAME = path.basename(process.cwd()).replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+let APP_NAME = 'app'; // fallback
+try {
+  const { execSync } = require('child_process');
+  const repoUrl = execSync('git config --get remote.origin.url', { encoding: 'utf8' }).trim();
+  APP_NAME = repoUrl.split('/').pop().replace(/\.git$/, '').replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+} catch (error) {
+  console.log('Could not get repo name, using fallback');
+}
 const TODO_TABLE = `${APP_NAME}_todo_items`;
 
 const pool = new Pool({
@@ -68,6 +75,16 @@ app.get('/api/config', (req, res) => {
     supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
     siteUrl: process.env.SITE_URL || `http://localhost:3000`,
     deployUrl: process.env.SITE_URL
+  });
+});
+
+// Debug endpoint to check app name and table name
+app.get('/api/debug/table', (req, res) => {
+  res.json({
+    cwd: process.cwd(),
+    appName: APP_NAME,
+    tableName: TODO_TABLE,
+    basename: path.basename(process.cwd())
   });
 });
 
